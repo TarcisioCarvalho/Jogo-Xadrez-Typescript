@@ -39,7 +39,11 @@ import { Posicao } from "./Posicao.js";
             return true
         }
 
-     
+        retiraPeca(posicao:Posicao):Peca|null{
+            if(!this.existePeca(posicao)) return null
+
+            return this.Mostrapeca(undefined,undefined,posicao);
+        }
 
         colocaPeca(peca:Peca,posicao:Posicao){
            if (this.existePeca(posicao)) throw new TabuleiroError("Já existe Peça nessa posição"); 

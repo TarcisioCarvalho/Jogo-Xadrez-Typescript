@@ -8,6 +8,7 @@ export class Tela {
                 quadrado.setAttribute('class', "quadrado");
                 if (tabuleiro.Mostrapeca(i, j) !== null) {
                     const image = document.createElement('img');
+                    image.addEventListener('click', () => alert(tabuleiro.Mostrapeca(i, j)?.toString()));
                     image.src = tabuleiro.Mostrapeca(i, j, undefined)?.imagem;
                     quadrado.appendChild(image);
                 }

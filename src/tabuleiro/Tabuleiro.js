@@ -29,6 +29,11 @@ export class Tabuleiro {
             return false;
         return true;
     }
+    retiraPeca(posicao) {
+        if (!this.existePeca(posicao))
+            return null;
+        return this.Mostrapeca(undefined, undefined, posicao);
+    }
     colocaPeca(peca, posicao) {
         if (this.existePeca(posicao))
             throw new TabuleiroError("Já existe Peça nessa posição");

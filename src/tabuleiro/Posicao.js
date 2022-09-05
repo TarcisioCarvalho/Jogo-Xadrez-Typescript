@@ -3,4 +3,7 @@ export class Posicao {
         this.linha = linha;
         this.coluna = coluna;
     }
+    toString() {
+        return `${this.linha}, ${this.coluna}`;
+    }
 }
