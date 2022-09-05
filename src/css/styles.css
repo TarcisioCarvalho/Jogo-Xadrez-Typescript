@@ -1,0 +1,22 @@
+body{
+    height: 100vh;
+}
+
+.tabuleiro{
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8,1fr);
+    border: 1px solid black;
+  
+}
+
+.quadrado{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+img{
+    width: 40%;
+    border-radius: 50%;
+}
