@@ -1,3 +1,4 @@
+import { TabuleiroError } from "./Erros/TabuleiroError.js";
 import { Peca } from "./Peca.js";
 import { Posicao } from "./Posicao.js";
 
@@ -11,14 +12,44 @@ import { Posicao } from "./Posicao.js";
             this.peca = new Array(8).fill(null).map(()=> new Array(8).fill(null));
         }
 
-        Mostrapeca(linha:number=8,coluna:number=8) : Peca|null{
-            return this.peca[linha][coluna];
+        Mostrapeca(linha?:number,coluna?:number,posicao?:Posicao) : Peca|null{
+            if (posicao!==undefined)  {
+                return this.peca[posicao.linha][posicao.coluna]
+            };
+            if(linha!==undefined && coluna!==undefined){
+                return this.peca[linha][coluna];
+            }
+            return null;
         }
 
+        existePeca(posicao:Posicao):boolean{
+            this.validaPosicao(posicao)
+
+            return this.Mostrapeca(undefined,undefined,posicao) !==null;
+        }
+
+        validaPosicao(posicao:Posicao):void{
+            if(!this.posicaoValida(posicao)) throw new TabuleiroError("Posição Inválida");
+        }
+
+        posicaoValida(posicao:Posicao):boolean{
+            if(posicao.linha<0 || posicao.linha>=this.linhas || posicao.coluna<0 || posicao.coluna>=this.colunas)
+            return false
+
+            return true
+        }
+
+     
+
         colocaPeca(peca:Peca,posicao:Posicao){
+           if (this.existePeca(posicao)) throw new TabuleiroError("Já existe Peça nessa posição"); 
+            
+           
             this.peca[posicao.linha][posicao.coluna] = peca;
             peca.posicao=posicao;
         }
       
     }
 
+
+    

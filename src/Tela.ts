@@ -1,5 +1,6 @@
 import { Tabuleiro } from "./tabuleiro/Tabuleiro.js";
 import { Peca } from "./tabuleiro/Peca.js";
+import { Posicao } from "./tabuleiro/Posicao.js";
 
 export class Tela{
     static imprimirTabuleiro (tabuleiro:Tabuleiro){
@@ -11,10 +12,13 @@ export class Tela{
 
             quadrado.setAttribute("id",`i${i}${j}`);
             quadrado.setAttribute('class',"quadrado");
-            if (tabuleiro.Mostrapeca(i,j)!==null) {
+            if (tabuleiro.Mostrapeca(i,j)!== null) {
+               
                 const image = document.createElement('img');
-                image.src = tabuleiro.Mostrapeca(i,j)?.imagem;
+                image.src = tabuleiro.Mostrapeca(i,j, undefined)?.imagem;
                 quadrado.appendChild(image);
+                
+                
             }
             tabuleiroElement?.appendChild(quadrado);
 
@@ -33,4 +37,6 @@ export class Tela{
        
     }
 }
+
+
 

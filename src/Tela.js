@@ -8,7 +8,7 @@ export class Tela {
                 quadrado.setAttribute('class', "quadrado");
                 if (tabuleiro.Mostrapeca(i, j) !== null) {
                     const image = document.createElement('img');
-                    image.src = tabuleiro.Mostrapeca(i, j)?.imagem;
+                    image.src = tabuleiro.Mostrapeca(i, j, undefined)?.imagem;
                     quadrado.appendChild(image);
                 }
                 tabuleiroElement?.appendChild(quadrado);
