@@ -25,7 +25,7 @@ import { Posicao } from "./Posicao.js";
         existePeca(posicao:Posicao):boolean{
             this.validaPosicao(posicao)
 
-            return this.Mostrapeca(undefined,undefined,posicao) !==null;
+            return this.Mostrapeca(undefined,undefined,posicao) !== null;
         }
 
         validaPosicao(posicao:Posicao):void{
@@ -41,8 +41,11 @@ import { Posicao } from "./Posicao.js";
 
         retiraPeca(posicao:Posicao):Peca|null{
             if(!this.existePeca(posicao)) return null
-
-            return this.Mostrapeca(undefined,undefined,posicao);
+           const pecaAux:Peca|null = this.Mostrapeca(undefined,undefined,posicao);
+          
+           this.peca[posicao.linha][posicao.coluna] = null;
+          
+           return pecaAux;
         }
 
         colocaPeca(peca:Peca,posicao:Posicao){

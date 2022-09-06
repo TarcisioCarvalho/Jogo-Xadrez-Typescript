@@ -32,7 +32,9 @@ export class Tabuleiro {
     retiraPeca(posicao) {
         if (!this.existePeca(posicao))
             return null;
-        return this.Mostrapeca(undefined, undefined, posicao);
+        const pecaAux = this.Mostrapeca(undefined, undefined, posicao);
+        this.peca[posicao.linha][posicao.coluna] = null;
+        return pecaAux;
     }
     colocaPeca(peca, posicao) {
         if (this.existePeca(posicao))
