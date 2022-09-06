@@ -5,24 +5,24 @@ export class Tela {
         function teste(e) {
             const linha = e.target.id[1];
             const coluna = e.target.id[2];
-            console.log("Aki é o teste da peça a movimentar" + Tela.pecaAMovimentar);
-            if (Tela.pecaAMovimentar && linha !== undefined && coluna !== undefined) {
+            if (Tela.pecaAMovimentar &&
+                linha !== undefined &&
+                coluna !== undefined &&
+                Tela.pecaAMovimentar.podeMover(new Posicao(linha, coluna)) &&
+                Tela.pecaAMovimentar.movimentosPossiveis(new Posicao(linha, coluna))) {
                 const origem = Tela.pecaAMovimentar.posicao;
-                console.log(origem);
                 const destino = new Posicao(linha, coluna);
-                console.log(destino);
                 let element = document.querySelector(`#i${origem.linha}${origem.coluna}`);
                 element?.removeChild(element.firstChild);
-                console.log(element?.firstChild);
-                console.log(element);
+                tabuleiro.retiraPeca(new Posicao(linha, coluna));
                 tabuleiro.colocaPeca(Tela.pecaAMovimentar, new Posicao(linha, coluna));
                 const img = document.createElement('img');
                 img.src = Tela.pecaAMovimentar.imagem;
                 img.addEventListener('click', () => Tela.removePeca(tabuleiro, linha, coluna));
                 element = document.querySelector(`#i${linha}${coluna}`);
-                console.log("Estou olhando aki" + element);
+                if (element?.firstChild)
+                    element?.removeChild(element.firstChild);
                 element?.appendChild(img);
-                console.log(tabuleiro);
                 Tela.pecaAMovimentar = null;
             }
         }
@@ -62,5 +62,3 @@ export class Tela {
     }
 }
 Tela.pecaAMovimentar = null;
-Tela.imageAMovimentar = null;
-Tela.divAMovimentar = null;
