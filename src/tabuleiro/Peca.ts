@@ -12,7 +12,7 @@ import { Tabuleiro } from "./Tabuleiro.js";
         constructor(public Cor:Cor,public tabuleiro:Tabuleiro){}
 
         public podeMover(posicao:Posicao):boolean{
-            const p:Peca = this.tabuleiro.Mostrapeca(undefined,undefined,posicao)!;
+            const p:Peca = this.tabuleiro.Mostrapeca(posicao)!;
 
             return p === null || p.Cor !== this.Cor;
         }

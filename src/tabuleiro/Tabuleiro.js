@@ -6,19 +6,14 @@ export class Tabuleiro {
         this.peca = [];
         this.peca = new Array(8).fill(null).map(() => new Array(8).fill(null));
     }
-    Mostrapeca(linha, coluna, posicao) {
-        if (posicao !== undefined) {
+    Mostrapeca(posicao) {
+        if (posicao)
             return this.peca[posicao.linha][posicao.coluna];
-        }
-        ;
-        if (linha !== undefined && coluna !== undefined) {
-            return this.peca[linha][coluna];
-        }
         return null;
     }
     existePeca(posicao) {
         this.validaPosicao(posicao);
-        return this.Mostrapeca(undefined, undefined, posicao) !== null;
+        return this.Mostrapeca(posicao) !== null;
     }
     validaPosicao(posicao) {
         if (!this.posicaoValida(posicao))
@@ -32,7 +27,7 @@ export class Tabuleiro {
     retiraPeca(posicao) {
         if (!this.existePeca(posicao))
             return null;
-        const pecaAux = this.Mostrapeca(undefined, undefined, posicao);
+        const pecaAux = this.Mostrapeca(posicao);
         this.peca[posicao.linha][posicao.coluna] = null;
         return pecaAux;
     }

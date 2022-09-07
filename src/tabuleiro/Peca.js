@@ -5,7 +5,7 @@ export class Peca {
         this.posicao = null;
     }
     podeMover(posicao) {
-        const p = this.tabuleiro.Mostrapeca(undefined, undefined, posicao);
+        const p = this.tabuleiro.Mostrapeca(posicao);
         return p === null || p.Cor !== this.Cor;
     }
 }

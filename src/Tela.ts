@@ -5,21 +5,21 @@ import { Posicao } from "./tabuleiro/Posicao.js";
 export class Tela{
 
    static  pecaAMovimentar:Peca|null = null;
-
+   
 
     static imprimirTabuleiro (tabuleiro:Tabuleiro){
 
         let tabuleiroElement:HTMLDivElement|null = document.querySelector('#tabuleiro');
 
        function teste(e){
-       
-            const linha = e.target.id[1];
-            const coluna = e.target.id[2];
-       
-        
+            
+           
+            const linha = e.target.id[1] === undefined?undefined:Number(e.target.id[1]) 
+            const coluna= e.target.id[2] === undefined?undefined:Number(e.target.id[2]) 
+            
 
         if   (Tela.pecaAMovimentar &&
-             linha !==undefined && 
+             linha !== undefined && 
              coluna !== undefined &&
              Tela.pecaAMovimentar.podeMover(new Posicao(linha,coluna))&&
              Tela.pecaAMovimentar.movimentosPossiveis(new Posicao(linha,coluna))
@@ -28,7 +28,7 @@ export class Tela{
             
             
             const destino = new Posicao(linha,coluna);
-            
+            console.log(destino);
             let element = document.querySelector(`#i${origem!.linha}${origem!.coluna}`);
             element?.removeChild(element.firstChild!);
             tabuleiro.retiraPeca(new Posicao(linha,coluna));
@@ -52,15 +52,15 @@ export class Tela{
 
             quadrado.setAttribute("id",`i${i}${j}`);
             quadrado.setAttribute('class',"quadrado");
-            quadrado.addEventListener('click',teste);
+            quadrado.addEventListener('click', teste);
 
-            if (tabuleiro.Mostrapeca(i,j)!== null) {
-                console.log("entrei aki")
+            if (tabuleiro.Mostrapeca(new Posicao(i,j))!== null) {
                 const image = document.createElement('img');
-                image.addEventListener('click', ()=> this.removePeca(tabuleiro,i,j));
-                image.src = tabuleiro.Mostrapeca(i,j, undefined)?.imagem;
+                image.addEventListener('click', ()=> {
+                    this.removePeca(tabuleiro,i,j)
+                });
+                image.src = tabuleiro.Mostrapeca(new Posicao(i,j))?.imagem;
                 quadrado.appendChild(image);
-                
             }
 
             tabuleiroElement?.appendChild(quadrado);
@@ -81,10 +81,9 @@ export class Tela{
     }
 
     static removePeca(tabuleiro:Tabuleiro,linha:number,coluna:number){
-       
-        console.log('Removi a peça.');
+      
         this.pecaAMovimentar = tabuleiro.retiraPeca(new Posicao(linha,coluna));
-        
+       
       /*   console.log(tabuleiro);
         console.log(this.pecaAMovimentar);
         quadrado.removeChild(image);

@@ -9,46 +9,52 @@ export class Torre extends Peca {
             : 'https://i.pinimg.com/originals/a2/43/21/a24321d3060379def7dd0e1c7d53af47.jpg';
     }
     movimentosPossiveis(posicao) {
+        const p = new Posicao(posicao.linha, posicao.coluna);
         //Baixo
-        if (this.posicao?.linha < posicao.linha) {
-            const p = new Posicao(this.posicao?.linha + 1, this.posicao?.coluna);
-            while (p.linha < posicao.linha) {
-                if (this.tabuleiro.Mostrapeca(undefined, undefined, p) !== null)
-                    return false;
-                p.definirPosicao(p.linha + 1, p.coluna);
-            }
-            return true;
+        while (this.posicao?.linha < p.linha) {
+            if (this.tabuleiro.Mostrapeca(p) !== null
+                && (this.tabuleiro.Mostrapeca(p)?.Cor === this.Cor ||
+                    p.linha !== posicao.linha))
+                return false;
+            p.linha -= 1;
+            /*  {
+                 return false
+                 if(this.tabuleiro.Mostrapeca(p)?.Cor === this.Cor) return false;
+                 if(p.linha !== posicao.linha) return false;
+             } */
         }
+        if (this.posicao.linha < posicao.linha && this.posicao?.coluna === posicao.coluna)
+            return true;
         //Cima
-        if (this.posicao?.linha > posicao.linha) {
-            const p = new Posicao(this.posicao?.linha - 1, this.posicao?.coluna);
-            while (p.linha > posicao.linha) {
-                if (this.tabuleiro.Mostrapeca(undefined, undefined, p) !== null)
-                    return false;
-                p.definirPosicao(p.linha - 1, p.coluna);
-            }
-            return true;
+        while (this.posicao?.linha > p.linha) {
+            if (this.tabuleiro.Mostrapeca(p) !== null
+                && (this.tabuleiro.Mostrapeca(p)?.Cor === this.Cor ||
+                    p.linha !== posicao.linha))
+                return false;
+            p.linha += 1;
         }
+        if (this.posicao.linha > posicao.linha && this.posicao?.coluna === posicao.coluna)
+            return true;
         //Direita
-        if (this.posicao?.coluna < posicao.coluna) {
-            const p = new Posicao(this.posicao?.linha, this.posicao?.coluna + 1);
-            while (p.coluna < posicao.coluna) {
-                if (this.tabuleiro.Mostrapeca(undefined, undefined, p) !== null)
-                    return false;
-                p.definirPosicao(p.linha, p.coluna + 1);
-            }
-            return true;
+        while (this.posicao?.coluna < p.coluna) {
+            if (this.tabuleiro.Mostrapeca(p) !== null
+                && (this.tabuleiro.Mostrapeca(p)?.Cor === this.Cor ||
+                    p.coluna !== posicao.coluna))
+                return false;
+            p.coluna -= 1;
         }
+        if (this.posicao?.coluna < posicao?.coluna && this.posicao?.linha === posicao.linha)
+            return true;
         //Esquerda
-        if (this.posicao?.coluna > posicao.coluna) {
-            const p = new Posicao(this.posicao?.linha, this.posicao?.coluna - 1);
-            while (p.coluna > posicao.coluna) {
-                if (this.tabuleiro.Mostrapeca(undefined, undefined, p) !== null)
-                    return false;
-                p.definirPosicao(p.linha, p.coluna - 1);
-            }
-            return true;
+        while (this.posicao?.coluna > p.coluna) {
+            if (this.tabuleiro.Mostrapeca(p) !== null
+                && (this.tabuleiro.Mostrapeca(p)?.Cor === this.Cor ||
+                    p.coluna !== posicao.coluna))
+                return false;
+            p.coluna += 1;
         }
+        if (this.posicao?.coluna > posicao?.coluna && this.posicao?.linha === posicao.linha)
+            return true;
     }
     toString() {
         return "T";
