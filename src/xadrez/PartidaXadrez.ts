@@ -31,7 +31,7 @@ export class PartidaXadrez{
         (
         public tabuleiro:Tabuleiro,
         public pecasEmJogo:Peca[]=[],
-        public pecasCapturada:Peca[]=[]
+        public pecasCapturadas:Peca[]=[]
         )
         {
         this._turno = 1;
@@ -51,6 +51,16 @@ export class PartidaXadrez{
             this.colocaNovaPeca(new Rei(Cor.Preta,this.tabuleiro),new Posicao(0,3));
             this.colocaNovaPeca(new Torre(Cor.Preta,this.tabuleiro),new Posicao(0,0));
             this.colocaNovaPeca(new Torre(Cor.Preta,this.tabuleiro),new Posicao(0,7));
+        }
+
+        public mudaJogador():void{
+            this.jogadorAtual = this.jogadorAtual === Cor.Branca?
+            Cor.Preta:
+            Cor.Branca;
+        }
+
+        public rei(cor:Cor):Peca|undefined{
+           return this.pecasEmJogo.find(peca => (peca.toString() === 'Rei' && peca.Cor === cor))
         }
 
 }

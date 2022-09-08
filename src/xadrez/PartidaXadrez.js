@@ -3,10 +3,10 @@ import { Posicao } from "../tabuleiro/Posicao.js";
 import { Rei } from "./Rei.js";
 import { Torre } from "./Torre.js";
 export class PartidaXadrez {
-    constructor(tabuleiro, pecasEmJogo = [], pecasCapturada = []) {
+    constructor(tabuleiro, pecasEmJogo = [], pecasCapturadas = []) {
         this.tabuleiro = tabuleiro;
         this.pecasEmJogo = pecasEmJogo;
-        this.pecasCapturada = pecasCapturada;
+        this.pecasCapturadas = pecasCapturadas;
         this._turno = 1;
         this._jogadorAtual = Cor.Branca;
     }
@@ -33,5 +33,13 @@ export class PartidaXadrez {
         this.colocaNovaPeca(new Rei(Cor.Preta, this.tabuleiro), new Posicao(0, 3));
         this.colocaNovaPeca(new Torre(Cor.Preta, this.tabuleiro), new Posicao(0, 0));
         this.colocaNovaPeca(new Torre(Cor.Preta, this.tabuleiro), new Posicao(0, 7));
+    }
+    mudaJogador() {
+        this.jogadorAtual = this.jogadorAtual === Cor.Branca ?
+            Cor.Preta :
+            Cor.Branca;
+    }
+    rei(cor) {
+        return this.pecasEmJogo.find(peca => (peca.toString() === 'Rei' && peca.Cor === cor));
     }
 }

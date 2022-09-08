@@ -21,3 +21,29 @@ img{
     border-radius: 50%;
     cursor: pointer;
 }
+
+#pecasCapturadasPretas{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+#pecasCapturadasPretas img{
+    border: 1px solid red;
+    width: 5%;
+}
+
+
+
+#pecasCapturadasBrancas{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+#pecasCapturadasBrancas img{
+    border: 1px solid red;
+    width: 5%;
+}
