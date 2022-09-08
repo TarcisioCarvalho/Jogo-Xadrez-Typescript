@@ -1,19 +1,22 @@
 import { Tabuleiro } from "./tabuleiro/Tabuleiro.js";
 import { Peca } from "./tabuleiro/Peca.js";
 import { Posicao } from "./tabuleiro/Posicao.js";
+import { PartidaXadrez } from "./xadrez/PartidaXadrez.js";
 
 export class Tela{
 
    static  pecaAMovimentar:Peca|null = null;
    
 
-    static imprimirTabuleiro (tabuleiro:Tabuleiro){
-
+    static imprimirTabuleiro (partidaXadrez:PartidaXadrez){
+        console.log("Aki");
+        partidaXadrez.colocaPecas();
+        const tabuleiro:Tabuleiro = partidaXadrez.tabuleiro;
         let tabuleiroElement:HTMLDivElement|null = document.querySelector('#tabuleiro');
 
        function teste(e){
             
-           
+            
             const linha = e.target.id[1] === undefined?undefined:Number(e.target.id[1]) 
             const coluna= e.target.id[2] === undefined?undefined:Number(e.target.id[2]) 
             
@@ -89,15 +92,6 @@ export class Tela{
         quadrado.removeChild(image);
         this.divAMovimentar = quadrado;
         this.imageAMovimentar = image; */
-        
-    }
-
-   
-
- 
-
-    static moverPeca(){
-
         
     }
 }

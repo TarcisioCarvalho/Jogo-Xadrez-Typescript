@@ -1,6 +1,9 @@
 import { Posicao } from "./tabuleiro/Posicao.js";
 export class Tela {
-    static imprimirTabuleiro(tabuleiro) {
+    static imprimirTabuleiro(partidaXadrez) {
+        console.log("Aki");
+        partidaXadrez.colocaPecas();
+        const tabuleiro = partidaXadrez.tabuleiro;
         let tabuleiroElement = document.querySelector('#tabuleiro');
         function teste(e) {
             const linha = e.target.id[1] === undefined ? undefined : Number(e.target.id[1]);
@@ -58,8 +61,6 @@ export class Tela {
           quadrado.removeChild(image);
           this.divAMovimentar = quadrado;
           this.imageAMovimentar = image; */
-    }
-    static moverPeca() {
     }
 }
 Tela.pecaAMovimentar = null;
