@@ -65,6 +65,8 @@ export class Torre extends Peca{
        }
 
        if(this.posicao?.coluna > posicao?.coluna && this.posicao?.linha === posicao.linha) return true;
+
+       return false;
     }
 
 toString():string {
