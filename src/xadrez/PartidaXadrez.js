@@ -33,6 +33,8 @@ export class PartidaXadrez {
         this.colocaNovaPeca(new Rei(Cor.Preta, this.tabuleiro), new Posicao(0, 3), tabuleiro);
         this.colocaNovaPeca(new Torre(Cor.Preta, this.tabuleiro), new Posicao(0, 0), tabuleiro);
         this.colocaNovaPeca(new Torre(Cor.Preta, this.tabuleiro), new Posicao(0, 7), tabuleiro);
+        this.colocaNovaPeca(new Torre(Cor.Preta, this.tabuleiro), new Posicao(5, 4), tabuleiro);
+        this.colocaNovaPeca(new Torre(Cor.Preta, this.tabuleiro), new Posicao(6, 4), tabuleiro);
     }
     mudaJogador() {
         this.jogadorAtual = this.jogadorAtual === Cor.Branca ?
@@ -61,6 +63,7 @@ export class PartidaXadrez {
         console.log(tabuleiro.Mostrapeca(posicao)); */
         let flag = false;
         const pecaRei = this.rei(this.jogadorAtual);
+        console.log("Teste", this.pecasEmJogo, this.jogadorAtual);
         const pecasCorAdversaria = this.pecasEmJogo.filter(pecaAdversaria => pecaAdversaria.Cor !== this.jogadorAtual);
         //console.log(pecasCorAdversaria[1].movimentosPossiveis(new Posicao(0,1)));
         pecasCorAdversaria.forEach(pecaCorAdversaria => {
