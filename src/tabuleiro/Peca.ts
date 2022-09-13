@@ -15,6 +15,10 @@ import { Tabuleiro } from "./Tabuleiro.js";
             this.qtdMovimentos++;
         }
 
+        public decrementaQtdMovimentos():void{
+            this.qtdMovimentos--;
+        }
+
         public podeMover(posicao:Posicao):boolean{
             const p:Peca = this.tabuleiro.Mostrapeca(posicao)!;
 

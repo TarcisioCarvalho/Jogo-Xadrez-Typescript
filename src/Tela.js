@@ -7,7 +7,6 @@ export class Tela {
         let tabuleiroElement = document.querySelector('#tabuleiro');
         let pecaRetirada;
         function teste(e) {
-            console.log(partidaXadrez.tabuleiro);
             const linha = e.target.id[1] === undefined ? undefined : Number(e.target.id[1]);
             const coluna = e.target.id[2] === undefined ? undefined : Number(e.target.id[2]);
             if (tabuleiro.Mostrapeca(new Posicao(linha, coluna)) !== null &&
@@ -32,25 +31,25 @@ export class Tela {
                 const origem = Tela.pecaAMovimentar.posicao;
                 const destino = new Posicao(linha, coluna);
                 pecaRetirada = tabuleiro.retiraPeca(destino);
-                console.log("Peca Retirada", pecaRetirada);
                 if (pecaRetirada !== null)
                     partidaXadrez.pecasCapturadas.push(pecaRetirada);
                 partidaXadrez.pecasEmJogo = partidaXadrez.pecasEmJogo
                     .filter(pecaEmjogo => pecaEmjogo !== pecaRetirada);
                 tabuleiro.colocaPeca(Tela.pecaAMovimentar, new Posicao(linha, coluna));
                 //tabuleiro.colocaPeca(Tela.pecaAMovimentar,new Posicao(linha,coluna));
-                if (partidaXadrez.estaEmXeque()) {
+                if (partidaXadrez.meColoqueiEmXeque()) {
                     alert("Jogada inválida você não pode se Colocar em Xeque!");
-                    tabuleiro.retiraPeca(destino);
-                    if (pecaRetirada !== null)
-                        tabuleiro.colocaPeca(pecaRetirada, destino);
-                    tabuleiro.colocaPeca(Tela.pecaAMovimentar, origem);
-                    if (pecaRetirada !== null)
-                        partidaXadrez.pecasEmJogo.push(pecaRetirada);
-                    console.log("mostrando pecas em jogo", partidaXadrez.pecasEmJogo);
+                    partidaXadrez.desfazJogada(origem, destino, pecaRetirada);
+                    /*  tabuleiro.retiraPeca(destino);
+                     if(pecaRetirada!==null)tabuleiro.colocaPeca(pecaRetirada,destino);
+                     tabuleiro.colocaPeca(Tela.pecaAMovimentar,origem);
+                     if(pecaRetirada!==null) partidaXadrez.pecasEmJogo.push(pecaRetirada);
+                     console.log("mostrando pecas em jogo",partidaXadrez.pecasEmJogo); */
                     Tela.pecaAMovimentar = null;
                     return;
                 }
+                if (partidaXadrez.coloqueiEmXeque())
+                    alert("Cheque!");
                 let element = document.querySelector(`#i${origem.linha}${origem.coluna}`);
                 element?.removeChild(element.firstChild);
                 if (pecaRetirada !== null)
@@ -74,6 +73,8 @@ export class Tela {
                     element?.removeChild(element.firstChild);
                 element?.appendChild(img);
                 Tela.pecaAMovimentar.incrementaQtdMovimentos();
+                if (partidaXadrez.xequeMate())
+                    alert("Xeque Mate");
                 partidaXadrez.mudaJogador();
                 Tela.pecaAMovimentar = null;
             }

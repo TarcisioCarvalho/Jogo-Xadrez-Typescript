@@ -8,6 +8,9 @@ export class Peca {
     incrementaQtdMovimentos() {
         this.qtdMovimentos++;
     }
+    decrementaQtdMovimentos() {
+        this.qtdMovimentos--;
+    }
     podeMover(posicao) {
         const p = this.tabuleiro.Mostrapeca(posicao);
         return p === null || p.Cor !== this.Cor;

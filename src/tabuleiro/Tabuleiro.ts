@@ -33,8 +33,11 @@ import { Posicao } from "./Posicao.js";
         }
 
         posicaoValida(posicao:Posicao):boolean{
-            if(posicao.linha<0 || posicao.linha>=this.linhas || posicao.coluna<0 || posicao.coluna>=this.colunas)
-            return false
+
+            if( posicao.linha<0 ||
+                posicao.linha>=this.linhas ||
+                posicao.coluna<0 ||
+                posicao.coluna>=this.colunas) return false
 
             return true
         }
@@ -50,12 +53,13 @@ import { Posicao } from "./Posicao.js";
            return pecaAux;
         }
 
-        colocaPeca(peca:Peca,posicao:Posicao){
+        colocaPeca(peca:Peca,posicao:Posicao,flag?:boolean){
            if (this.existePeca(posicao)) throw new TabuleiroError("Já existe Peça nessa posição"); 
             
            
             this.peca[posicao.linha][posicao.coluna] = peca;
             peca.posicao=posicao;
+            //if(flag)console.log(this.peca);
         }
       
     }

@@ -20,7 +20,10 @@ export class Tabuleiro {
             throw new TabuleiroError("Posição Inválida");
     }
     posicaoValida(posicao) {
-        if (posicao.linha < 0 || posicao.linha >= this.linhas || posicao.coluna < 0 || posicao.coluna >= this.colunas)
+        if (posicao.linha < 0 ||
+            posicao.linha >= this.linhas ||
+            posicao.coluna < 0 ||
+            posicao.coluna >= this.colunas)
             return false;
         return true;
     }
@@ -31,10 +34,11 @@ export class Tabuleiro {
         this.peca[posicao.linha][posicao.coluna] = null;
         return pecaAux;
     }
-    colocaPeca(peca, posicao) {
+    colocaPeca(peca, posicao, flag) {
         if (this.existePeca(posicao))
             throw new TabuleiroError("Já existe Peça nessa posição");
         this.peca[posicao.linha][posicao.coluna] = peca;
         peca.posicao = posicao;
+        //if(flag)console.log(this.peca);
     }
 }

@@ -63,11 +63,86 @@ export class PartidaXadrez{
             Cor.Branca;
         }
 
-        public rei(cor:Cor):Peca|undefined{
+        private rei(cor:Cor):Peca|undefined{
            return this.pecasEmJogo.find(peca => (peca.toString() === 'Rei' && peca.Cor === cor))
         }
 
-        public estaEmXeque():boolean{
+
+        public desfazJogada(origem:Posicao,destino:Posicao,pecaRetirada:Peca|null):void{
+
+            const pecaMovimentada=this.tabuleiro.retiraPeca(destino);
+            pecaMovimentada?.decrementaQtdMovimentos();
+
+            if(pecaRetirada!==null){
+                this.tabuleiro.colocaPeca(pecaRetirada,destino);
+                this.pecasEmJogo.push(pecaRetirada);
+            }
+
+            this.tabuleiro.colocaPeca(pecaMovimentada!,origem);
+        }
+
+        private corAdversaria():Cor{
+            return this.jogadorAtual === Cor.Branca?Cor.Preta:Cor.Branca;
+        }
+
+        public xequeMate():boolean{
+            if(!this.coloqueiEmXeque()) return false;
+
+            let flag:boolean = true;
+           
+            const pecaRei = this.rei(this.corAdversaria());
+            
+            const pecasCorAliada = this.pecasEmJogo.filter(pecaAliada=> pecaAliada.Cor!==this.jogadorAtual);
+          
+            //if(pecaRetirada!==null) this.tabuleiro.colocaPeca(pecaRetirada,new Posicao(1,1));
+            pecasCorAliada.forEach(peca =>{
+                for (let i = 0; i < this.tabuleiro.linhas; i++) {
+                    for (let j = 0; j < this.tabuleiro.colunas; j++) {
+                        const origem = peca.posicao;
+                        const destino = new Posicao(i,j);
+                        //console.log("Movimentos Possíveis ","peca ",peca,"destino", destino,peca.movimentosPossiveis(destino));
+                        if(peca.movimentosPossiveis(destino)){
+                            //console.log("Movimentos Possíveis ","peca ",peca,"destino", destino,peca.movimentosPossiveis(destino));
+                            const pecaAMovimentar = this.tabuleiro.retiraPeca(origem);
+                           // console.log("Peca a movimentar", pecaAMovimentar);
+                            const pecaRetirada = this.tabuleiro.retiraPeca(destino);
+                            this.tabuleiro.colocaPeca(peca!,destino,true);
+                            //console.log(this.tabuleiro);
+                            //console.log("Peca a movimentar ", pecaAMovimentar,"Peca retirada ", pecaRetirada);
+                            if(!this.coloqueiEmXeque()) {
+                                //console.log("Peça que tira o xeque ",peca,"Posicoes que tiram o xeque, ", destino)
+                                flag = false;
+                            }; 
+                            this.tabuleiro.colocaPeca(peca,origem);
+                            this.tabuleiro.retiraPeca(destino);
+                            if(pecaRetirada!==null) this.tabuleiro.colocaPeca(pecaRetirada,destino);
+                           
+                        }
+                      /*   if(peca.movimentosPossiveis(destino)){
+                            const pecaAMovimentar = this.tabuleiro.retiraPeca(origem);
+                            const pecaRetirada = this.tabuleiro.retiraPeca(destino);
+                            this.tabuleiro.colocaPeca(pecaAMovimentar,destino);
+                            if(!this.estaEmXeque(peca.Cor)) flag = false;
+                            this.desfazJogada(origem!,destino,pecaRetirada);
+                            if(!flag) return false;
+                        } */
+
+                    }
+                    
+                }
+            })
+            return flag;
+        }
+
+        public coloqueiEmXeque():boolean{
+            return this.estaEmXeque(this.corAdversaria());
+        }
+
+        public meColoqueiEmXeque():boolean{
+            return this.estaEmXeque(this.jogadorAtual);
+        }
+
+        public estaEmXeque(cor:Cor):boolean{
             /*  const  pecasCorAdversaria=[];
              const tabuleiroT = new Tabuleiro(8,8); */
              
@@ -89,9 +164,10 @@ export class PartidaXadrez{
             console.log(tabuleiro.Mostrapeca(posicao)); */
 
             let flag:boolean = false;
-            const pecaRei = this.rei(this.jogadorAtual);
-            console.log("Teste",this.pecasEmJogo,this.jogadorAtual);
-            const pecasCorAdversaria = this.pecasEmJogo.filter(pecaAdversaria=> pecaAdversaria.Cor!==this.jogadorAtual);
+            //const pecaRei = this.rei(this.jogadorAtual);
+            const pecaRei = this.rei(cor);
+            
+            const pecasCorAdversaria = this.pecasEmJogo.filter(pecaAdversaria=> pecaAdversaria.Cor!==cor);
             
             //console.log(pecasCorAdversaria[1].movimentosPossiveis(new Posicao(0,1)));
             pecasCorAdversaria.forEach(pecaCorAdversaria => {
