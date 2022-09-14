@@ -64,19 +64,18 @@ export class PartidaXadrez {
         const pecasCorAliada = this.pecasEmJogo.filter(pecaAliada => pecaAliada.Cor !== this.jogadorAtual);
         //if(pecaRetirada!==null) this.tabuleiro.colocaPeca(pecaRetirada,new Posicao(1,1));
         pecasCorAliada.forEach(peca => {
+            const origem = peca.posicao;
             for (let i = 0; i < this.tabuleiro.linhas; i++) {
                 for (let j = 0; j < this.tabuleiro.colunas; j++) {
-                    const origem = peca.posicao;
                     const destino = new Posicao(i, j);
-                    //console.log("Movimentos Possíveis ","peca ",peca,"destino", destino,peca.movimentosPossiveis(destino));
                     if (peca.movimentosPossiveis(destino)) {
-                        //console.log("Movimentos Possíveis ","peca ",peca,"destino", destino,peca.movimentosPossiveis(destino));
                         const pecaAMovimentar = this.tabuleiro.retiraPeca(origem);
-                        // console.log("Peca a movimentar", pecaAMovimentar);
                         const pecaRetirada = this.tabuleiro.retiraPeca(destino);
-                        this.tabuleiro.colocaPeca(peca, destino, true);
-                        //console.log(this.tabuleiro);
-                        //console.log("Peca a movimentar ", pecaAMovimentar,"Peca retirada ", pecaRetirada);
+                        if (pecaRetirada !== null)
+                            this.pecasEmJogo = this.pecasEmJogo
+                                .filter(pecaEmJogo => pecaEmJogo !== pecaRetirada);
+                        this.tabuleiro.colocaPeca(pecaAMovimentar, destino, true);
+                        console.log(pecaAMovimentar?.posicao, !this.coloqueiEmXeque());
                         if (!this.coloqueiEmXeque()) {
                             //console.log("Peça que tira o xeque ",peca,"Posicoes que tiram o xeque, ", destino)
                             flag = false;
@@ -84,8 +83,11 @@ export class PartidaXadrez {
                         ;
                         this.tabuleiro.colocaPeca(peca, origem);
                         this.tabuleiro.retiraPeca(destino);
-                        if (pecaRetirada !== null)
+                        if (pecaRetirada !== null) {
                             this.tabuleiro.colocaPeca(pecaRetirada, destino);
+                            this.pecasEmJogo.push(pecaRetirada);
+                        }
+                        ;
                     }
                     /*   if(peca.movimentosPossiveis(destino)){
                           const pecaAMovimentar = this.tabuleiro.retiraPeca(origem);
