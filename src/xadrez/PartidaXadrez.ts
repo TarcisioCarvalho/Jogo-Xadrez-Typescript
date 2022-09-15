@@ -2,6 +2,10 @@ import { Cor } from "../tabuleiro/Enums/Cor.js";
 import { Peca } from "../tabuleiro/Peca.js";
 import { Posicao } from "../tabuleiro/Posicao.js";
 import { Tabuleiro } from "../tabuleiro/Tabuleiro.js";
+import { Bispo } from "./Bispo.js";
+import { Cavalo } from "./Cavalo.js";
+import { Peao } from "./Peao.js";
+import { Rainha } from "./Rainha.js";
 import { Rei } from "./Rei.js";
 import { Torre } from "./Torre.js";
 
@@ -47,14 +51,48 @@ export class PartidaXadrez{
 
         public  colocaPecas(tabuleiro:Tabuleiro= this.tabuleiro):void{
             
-            this.colocaNovaPeca(new Rei(Cor.Branca,this.tabuleiro),new Posicao(7,3),tabuleiro);
+            this.colocaNovaPeca(new Rei(Cor.Branca,this.tabuleiro),new Posicao(7,4),tabuleiro);
+            this.colocaNovaPeca(new Rainha(Cor.Branca,this.tabuleiro),new Posicao(7,3),tabuleiro);
+
             this.colocaNovaPeca(new Torre(Cor.Branca,this.tabuleiro),new Posicao(7,0),tabuleiro);
             this.colocaNovaPeca(new Torre(Cor.Branca,this.tabuleiro),new Posicao(7,7),tabuleiro);
-            this.colocaNovaPeca(new Rei(Cor.Preta,this.tabuleiro),new Posicao(0,3),tabuleiro);
+
+            this.colocaNovaPeca(new Cavalo(Cor.Branca,this.tabuleiro),new Posicao(7,6),tabuleiro);
+            this.colocaNovaPeca(new Cavalo(Cor.Branca,this.tabuleiro),new Posicao(7,1),tabuleiro);
+
+            this.colocaNovaPeca(new Bispo(Cor.Branca,this.tabuleiro),new Posicao(7,2),tabuleiro);
+            this.colocaNovaPeca(new Bispo(Cor.Branca,this.tabuleiro),new Posicao(7,5),tabuleiro);
+
+            this.colocaNovaPeca(new Peao(Cor.Branca,this.tabuleiro),new Posicao(6,7),tabuleiro);
+            this.colocaNovaPeca(new Peao(Cor.Branca,this.tabuleiro),new Posicao(6,6),tabuleiro);
+            this.colocaNovaPeca(new Peao(Cor.Branca,this.tabuleiro),new Posicao(6,5),tabuleiro);
+            this.colocaNovaPeca(new Peao(Cor.Branca,this.tabuleiro),new Posicao(6,4),tabuleiro);
+            this.colocaNovaPeca(new Peao(Cor.Branca,this.tabuleiro),new Posicao(6,3),tabuleiro);
+            this.colocaNovaPeca(new Peao(Cor.Branca,this.tabuleiro),new Posicao(6,2),tabuleiro);
+            this.colocaNovaPeca(new Peao(Cor.Branca,this.tabuleiro),new Posicao(6,1),tabuleiro);
+            this.colocaNovaPeca(new Peao(Cor.Branca,this.tabuleiro),new Posicao(6,0),tabuleiro);
+            
+
+            this.colocaNovaPeca(new Rei(Cor.Preta,this.tabuleiro),new Posicao(0,4),tabuleiro);
+            this.colocaNovaPeca(new Rainha(Cor.Preta,this.tabuleiro),new Posicao(0,3),tabuleiro);
+
             this.colocaNovaPeca(new Torre(Cor.Preta,this.tabuleiro),new Posicao(0,0),tabuleiro);
             this.colocaNovaPeca(new Torre(Cor.Preta,this.tabuleiro),new Posicao(0,7),tabuleiro);
-            this.colocaNovaPeca(new Torre(Cor.Preta,this.tabuleiro),new Posicao(5,4),tabuleiro);
-            this.colocaNovaPeca(new Torre(Cor.Preta,this.tabuleiro),new Posicao(6,4),tabuleiro);
+
+            this.colocaNovaPeca(new Cavalo(Cor.Preta,this.tabuleiro),new Posicao(0,6),tabuleiro);
+            this.colocaNovaPeca(new Cavalo(Cor.Preta,this.tabuleiro),new Posicao(0,1),tabuleiro);
+
+            this.colocaNovaPeca(new Bispo(Cor.Preta,this.tabuleiro),new Posicao(0,2),tabuleiro);
+            this.colocaNovaPeca(new Bispo(Cor.Preta,this.tabuleiro),new Posicao(0,5),tabuleiro);
+
+            this.colocaNovaPeca(new Peao(Cor.Preta,this.tabuleiro),new Posicao(1,7),tabuleiro);
+            this.colocaNovaPeca(new Peao(Cor.Preta,this.tabuleiro),new Posicao(1,6),tabuleiro);
+            this.colocaNovaPeca(new Peao(Cor.Preta,this.tabuleiro),new Posicao(1,5),tabuleiro);
+            this.colocaNovaPeca(new Peao(Cor.Preta,this.tabuleiro),new Posicao(1,4),tabuleiro);
+            this.colocaNovaPeca(new Peao(Cor.Preta,this.tabuleiro),new Posicao(1,3),tabuleiro);
+            this.colocaNovaPeca(new Peao(Cor.Preta,this.tabuleiro),new Posicao(1,2),tabuleiro);
+            this.colocaNovaPeca(new Peao(Cor.Preta,this.tabuleiro),new Posicao(1,1),tabuleiro);
+            this.colocaNovaPeca(new Peao(Cor.Preta,this.tabuleiro),new Posicao(1,0),tabuleiro);
         }
 
         public mudaJogador():void{
@@ -94,7 +132,6 @@ export class PartidaXadrez{
             
             const pecasCorAliada = this.pecasEmJogo.filter(pecaAliada=> pecaAliada.Cor!==this.jogadorAtual);
           
-            //if(pecaRetirada!==null) this.tabuleiro.colocaPeca(pecaRetirada,new Posicao(1,1));
             pecasCorAliada.forEach(peca =>{
                 const origem = peca.posicao;
                 for (let i = 0; i < this.tabuleiro.linhas; i++) {
@@ -110,27 +147,18 @@ export class PartidaXadrez{
                             if(pecaRetirada!==null)this.pecasEmJogo = this.pecasEmJogo
                             .filter(pecaEmJogo=> pecaEmJogo!==pecaRetirada);
                             this.tabuleiro.colocaPeca(pecaAMovimentar,destino,true);
-                            console.log(pecaAMovimentar?.posicao,!this.coloqueiEmXeque());
-                            if(!this.coloqueiEmXeque()) {
-                                //console.log("Peça que tira o xeque ",peca,"Posicoes que tiram o xeque, ", destino)
-                                flag = false;
-                            }; 
+                           
+                            if(!this.coloqueiEmXeque()) flag = false;
+                             
                             this.tabuleiro.colocaPeca(peca,origem);
                             this.tabuleiro.retiraPeca(destino);
+
                             if(pecaRetirada!==null) {
                                 this.tabuleiro.colocaPeca(pecaRetirada,destino)
                                 this.pecasEmJogo.push(pecaRetirada);
                             };
                            
                         }
-                      /*   if(peca.movimentosPossiveis(destino)){
-                            const pecaAMovimentar = this.tabuleiro.retiraPeca(origem);
-                            const pecaRetirada = this.tabuleiro.retiraPeca(destino);
-                            this.tabuleiro.colocaPeca(pecaAMovimentar,destino);
-                            if(!this.estaEmXeque(peca.Cor)) flag = false;
-                            this.desfazJogada(origem!,destino,pecaRetirada);
-                            if(!flag) return false;
-                        } */
 
                     }
                     
@@ -148,42 +176,19 @@ export class PartidaXadrez{
         }
 
         public estaEmXeque(cor:Cor):boolean{
-            /*  const  pecasCorAdversaria=[];
-             const tabuleiroT = new Tabuleiro(8,8); */
-             
-          /*   for (let i = 0; i < tabuleiroT.linhas; i++) {
-                for (let j = 0; j < tabuleiroT.colunas; j++) {
-                    if(tabuleiro.peca[i][j]!==null && tabuleiro.peca[i][j].Cor !== this.jogadorAtual) pecasCorAdversaria.push(tabuleiro.peca[i][j])
-                    if(i === posicao.linha && j === posicao.coluna) tabuleiroT.peca[i][j] = peca;
-                }
-            }  */
-            //const pecaRei = this.rei(this.jogadorAtual)
-    
-          /*   const pecaTeste = tabuleiro.Mostrapeca(new Posicao(0,0));
-            console.log("Posicao do Rei: " , pecaRei?.posicao);
-            console.log(pecaTeste?.movimentosPossiveis(pecaRei?.posicao));
-            if(pecaTeste?.movimentosPossiveis(pecaRei?.posicao)) return false; */
-            //return true;
-            
-            /* tabuleiro.colocaPeca(peca,posicao);
-            console.log(tabuleiro.Mostrapeca(posicao)); */
-
+          
             let flag:boolean = false;
-            //const pecaRei = this.rei(this.jogadorAtual);
+            
             const pecaRei = this.rei(cor);
             
             const pecasCorAdversaria = this.pecasEmJogo.filter(pecaAdversaria=> pecaAdversaria.Cor!==cor);
-            
-            //console.log(pecasCorAdversaria[1].movimentosPossiveis(new Posicao(0,1)));
-            pecasCorAdversaria.forEach(pecaCorAdversaria => {
-                
+                    
+            pecasCorAdversaria.forEach(pecaCorAdversaria => { 
                 if(pecaCorAdversaria.movimentosPossiveis(pecaRei?.posicao){
                     flag= true;
                 }
             })
-            return flag;
-
-        
+            return flag;        
         }
 
 }

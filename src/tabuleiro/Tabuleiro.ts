@@ -1,3 +1,4 @@
+import { Cor } from "./Enums/Cor.js";
 import { TabuleiroError } from "./Erros/TabuleiroError.js";
 import { Peca } from "./Peca.js";
 import { Posicao } from "./Posicao.js";
@@ -20,6 +21,11 @@ import { Posicao } from "./Posicao.js";
                 return null;
           
             
+        }
+
+        existePecaCorAdversaria(posicao:Posicao,cor:Cor):boolean{
+            console.log(this.Mostrapeca(posicao) !== null && this.Mostrapeca(posicao)?.Cor !== cor)
+            return this.Mostrapeca(posicao) !== null && this.Mostrapeca(posicao)?.Cor !== cor;
         }
 
         existePeca(posicao:Posicao):boolean{

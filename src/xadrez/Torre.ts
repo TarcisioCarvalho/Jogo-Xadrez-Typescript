@@ -5,8 +5,8 @@ import { Posicao } from "../tabuleiro/Posicao.js";
 export class Torre extends Peca{
    
     public imagem: string | null | undefined = this.Cor === Cor.Branca?
-     '../assets/img/brancas/torre.jpg'
-     :'https://i.pinimg.com/originals/a2/43/21/a24321d3060379def7dd0e1c7d53af47.jpg';
+     'https://github.com/TarcisioCarvalho/Jogo-Xadrez-Typescript/blob/main/src/assets/img/brancas/torre.jpg?raw=true'
+     :'https://github.com/TarcisioCarvalho/Jogo-Xadrez-Typescript/blob/main/src/assets/img/pretas/torre.jpg?raw=true';
 
      movimentosPossiveis(posicao:Posicao): boolean 
      {

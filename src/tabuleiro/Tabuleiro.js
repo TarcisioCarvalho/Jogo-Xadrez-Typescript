@@ -11,6 +11,10 @@ export class Tabuleiro {
             return this.peca[posicao.linha][posicao.coluna];
         return null;
     }
+    existePecaCorAdversaria(posicao, cor) {
+        console.log(this.Mostrapeca(posicao) !== null && this.Mostrapeca(posicao)?.Cor !== cor);
+        return this.Mostrapeca(posicao) !== null && this.Mostrapeca(posicao)?.Cor !== cor;
+    }
     existePeca(posicao) {
         this.validaPosicao(posicao);
         return this.Mostrapeca(posicao) !== null;
