@@ -12,7 +12,7 @@ export class Rainha extends Peca {
         const p = new Posicao(posicao.linha, posicao.coluna);
         let contador = 0;
         //Baixo
-        while (this.posicao?.linha < p.linha) {
+        while (this.posicao?.linha < p.linha && this.posicao?.coluna === p.coluna) {
             if (this.tabuleiro.Mostrapeca(p) !== null
                 && (this.tabuleiro.Mostrapeca(p)?.Cor === this.Cor ||
                     p.linha !== posicao.linha))
@@ -27,7 +27,7 @@ export class Rainha extends Peca {
         if (this.posicao.linha < posicao.linha && this.posicao?.coluna === posicao.coluna)
             return true;
         //Cima
-        while (this.posicao?.linha > p.linha) {
+        while (this.posicao?.linha > p.linha && this.posicao?.coluna === p.coluna) {
             if (this.tabuleiro.Mostrapeca(p) !== null
                 && (this.tabuleiro.Mostrapeca(p)?.Cor === this.Cor ||
                     p.linha !== posicao.linha))
@@ -37,7 +37,7 @@ export class Rainha extends Peca {
         if (this.posicao.linha > posicao.linha && this.posicao?.coluna === posicao.coluna)
             return true;
         //Direita
-        while (this.posicao?.coluna < p.coluna) {
+        while (this.posicao?.coluna < p.coluna && this.posicao?.linha === p.linha) {
             if (this.tabuleiro.Mostrapeca(p) !== null
                 && (this.tabuleiro.Mostrapeca(p)?.Cor === this.Cor ||
                     p.coluna !== posicao.coluna))
@@ -47,15 +47,14 @@ export class Rainha extends Peca {
         if (this.posicao?.coluna < posicao?.coluna && this.posicao?.linha === posicao.linha)
             return true;
         //Esquerda
-        while (this.posicao?.coluna > p.coluna) {
+        while (this.posicao?.coluna > p.coluna && this.posicao?.linha === p.linha) {
             if (this.tabuleiro.Mostrapeca(p) !== null
                 && (this.tabuleiro.Mostrapeca(p)?.Cor === this.Cor ||
                     p.coluna !== posicao.coluna))
                 return false;
             p.coluna += 1;
         }
-        if (this.posicao?.coluna > posicao?.coluna && this.posicao?.linha === posicao.linha)
-            return true;
+        //Noroeste
         while (this.posicao?.linha > p.linha && this.posicao?.coluna > p.coluna) {
             if (this.tabuleiro.Mostrapeca(p) !== null
                 && (this.tabuleiro.Mostrapeca(p)?.Cor === this.Cor || p.linha !== posicao.linha))
@@ -66,7 +65,7 @@ export class Rainha extends Peca {
         }
         if (this.posicao?.linha !== posicao.linha && this.posicao?.coluna !== posicao.coluna && this.posicao?.linha - contador === posicao.linha && this.posicao?.coluna - contador === posicao.coluna && this.podeMover(posicao))
             return true;
-        //Ne
+        //Nordeste
         while (this.posicao?.linha > p.linha && this.posicao?.coluna < p.coluna) {
             if (this.tabuleiro.Mostrapeca(p) !== null
                 && (this.tabuleiro.Mostrapeca(p)?.Cor === this.Cor || p.linha !== posicao.linha))
@@ -77,7 +76,7 @@ export class Rainha extends Peca {
         }
         if (this.posicao?.linha !== posicao.linha && this.posicao?.coluna !== posicao.coluna && this.posicao?.linha - contador === posicao.linha && this.posicao?.coluna + contador === posicao.coluna && this.podeMover(posicao))
             return true;
-        //Ne
+        //Sudeste
         while (this.posicao?.linha < p.linha && this.posicao?.coluna < p.coluna) {
             if (this.tabuleiro.Mostrapeca(p) !== null
                 && (this.tabuleiro.Mostrapeca(p)?.Cor === this.Cor || p.linha !== posicao.linha))
@@ -88,14 +87,14 @@ export class Rainha extends Peca {
         }
         if (this.posicao?.linha !== posicao.linha && this.posicao?.coluna !== posicao.coluna && this.posicao?.linha + contador === posicao.linha && this.posicao?.coluna + contador === posicao.coluna && this.podeMover(posicao))
             return true;
-        //Ne
+        //Sudoeste
         while (this.posicao?.linha < p.linha && this.posicao?.coluna > p.coluna) {
             if (this.tabuleiro.Mostrapeca(p) !== null
                 && (this.tabuleiro.Mostrapeca(p)?.Cor === this.Cor || p.linha !== posicao.linha))
                 return false;
             contador++;
             p.linha -= 1;
-            p.coluna -= 1;
+            p.coluna += 1;
         }
         if (this.posicao?.linha !== posicao.linha && this.posicao?.coluna !== posicao.coluna && this.posicao?.linha + contador === posicao.linha && this.posicao?.coluna - contador === posicao.coluna && this.podeMover(posicao))
             return true;

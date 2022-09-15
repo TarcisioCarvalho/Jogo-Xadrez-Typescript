@@ -15,7 +15,7 @@ export class Rainha extends Peca{
 
         //Baixo
         
-             while(this.posicao?.linha < p.linha){
+             while(this.posicao?.linha < p.linha && this.posicao?.coluna === p.coluna){
                  if(this.tabuleiro.Mostrapeca(p)!==null
                  && (this.tabuleiro.Mostrapeca(p)?.Cor === this.Cor || 
                  p.linha !== posicao.linha
@@ -32,7 +32,7 @@ export class Rainha extends Peca{
        
         //Cima
  
-        while(this.posicao?.linha>p.linha){
+        while(this.posicao?.linha>p.linha && this.posicao?.coluna === p.coluna){
          if(this.tabuleiro.Mostrapeca(p)!==null
          && (this.tabuleiro.Mostrapeca(p)?.Cor === this.Cor || 
          p.linha !== posicao.linha
@@ -44,7 +44,7 @@ export class Rainha extends Peca{
  
         //Direita
  
-        while(this.posicao?.coluna<p.coluna){
+        while(this.posicao?.coluna<p.coluna && this.posicao?.linha === p.linha){
          if(this.tabuleiro.Mostrapeca(p)!==null
          && (this.tabuleiro.Mostrapeca(p)?.Cor === this.Cor || 
          p.coluna !== posicao.coluna
@@ -56,7 +56,7 @@ export class Rainha extends Peca{
  
         //Esquerda
  
-        while(this.posicao?.coluna>p.coluna){
+        while(this.posicao?.coluna>p.coluna && this.posicao?.linha === p.linha){
          if(this.tabuleiro.Mostrapeca(p)!==null
          && (this.tabuleiro.Mostrapeca(p)?.Cor === this.Cor || 
          p.coluna !== posicao.coluna
@@ -64,20 +64,20 @@ export class Rainha extends Peca{
          p.coluna+=1;
         }
  
-        if(this.posicao?.coluna > posicao?.coluna && this.posicao?.linha === posicao.linha) return true;
-
+        //Noroeste
         while (this.posicao?.linha! > p.linha && this.posicao?.coluna! > p.coluna) {
             if(this.tabuleiro.Mostrapeca(p) !== null
             && (this.tabuleiro.Mostrapeca(p)?.Cor === this.Cor || p.linha !== posicao.linha )) return false
 
             contador++;
-            p.linha+=1;
-            p.coluna+=1;
+            p.linha += 1;
+            p.coluna += 1;
         }
-       if(this.posicao?.linha!==posicao.linha && this.posicao?.coluna !== posicao.coluna && this.posicao?.linha - contador === posicao.linha && this.posicao?.coluna - contador === posicao.coluna && this.podeMover(posicao)) return true;
+
+        if(this.posicao?.linha!==posicao.linha && this.posicao?.coluna !== posicao.coluna && this.posicao?.linha - contador === posicao.linha && this.posicao?.coluna - contador === posicao.coluna && this.podeMover(posicao)) return true;
        
 
-         //Ne
+         //Nordeste
          while (this.posicao?.linha! > p.linha && this.posicao?.coluna! < p.coluna) {
             if(this.tabuleiro.Mostrapeca(p) !== null
             && (this.tabuleiro.Mostrapeca(p)?.Cor === this.Cor || p.linha !== posicao.linha)) return false;
@@ -86,36 +86,32 @@ export class Rainha extends Peca{
             p.linha+=1;
             p.coluna-=1;
         }
-  
 
-       if(this.posicao?.linha!==posicao.linha && this.posicao?.coluna !== posicao.coluna && this.posicao?.linha! - contador === posicao.linha && this.posicao?.coluna! + contador === posicao.coluna && this.podeMover(posicao)) return true;
+        if(this.posicao?.linha!==posicao.linha && this.posicao?.coluna !== posicao.coluna && this.posicao?.linha! - contador === posicao.linha && this.posicao?.coluna! + contador === posicao.coluna && this.podeMover(posicao)) return true;
 
-       //Ne
+       //Sudeste
        while (this.posicao?.linha! < p.linha && this.posicao?.coluna! < p.coluna) {
         if(this.tabuleiro.Mostrapeca(p) !== null
         && (this.tabuleiro.Mostrapeca(p)?.Cor === this.Cor || p.linha !== posicao.linha)) return false;
-
+      
         contador++;
         p.linha -= 1;
         p.coluna -= 1;
     }
 
+    if(this.posicao?.linha!==posicao.linha && this.posicao?.coluna !== posicao.coluna && this.posicao?.linha! + contador === posicao.linha && this.posicao?.coluna + contador === posicao.coluna && this.podeMover(posicao)) return true;
 
-   if(this.posicao?.linha!==posicao.linha && this.posicao?.coluna !== posicao.coluna && this.posicao?.linha! + contador === posicao.linha && this.posicao?.coluna + contador === posicao.coluna && this.podeMover(posicao)) return true;
+    //Sudoeste
+    while (this.posicao?.linha! < p.linha && this.posicao?.coluna! > p.coluna) {
+        if(this.tabuleiro.Mostrapeca(p) !== null
+        && (this.tabuleiro.Mostrapeca(p)?.Cor === this.Cor || p.linha !== posicao.linha)) return false;
 
-   //Ne
-   while (this.posicao?.linha! < p.linha && this.posicao?.coluna! > p.coluna) {
-    if(this.tabuleiro.Mostrapeca(p) !== null
-    && (this.tabuleiro.Mostrapeca(p)?.Cor === this.Cor || p.linha !== posicao.linha)) return false;
-
-    contador++;
-    p.linha -= 1;
-    p.coluna -= 1;
+        contador++;
+        p.linha -= 1;
+        p.coluna += 1;
 }
 
-
-if(this.posicao?.linha!==posicao.linha && this.posicao?.coluna !== posicao.coluna && this.posicao?.linha! + contador === posicao.linha && this.posicao?.coluna - contador === posicao.coluna && this.podeMover(posicao)) return true;
-
+    if(this.posicao?.linha!==posicao.linha && this.posicao?.coluna !== posicao.coluna && this.posicao?.linha! + contador === posicao.linha && this.posicao?.coluna - contador === posicao.coluna && this.podeMover(posicao)) return true;
         return false
 }
     toString(): string {
