@@ -7,10 +7,12 @@ import { Posicao } from "./Posicao.js";
     export class Tabuleiro{
 
         public peca:Peca|null[][] 
+        public vuneravelEnPassant : Peca | null;
 
         constructor(public linhas:number=8,public colunas:number=8){
             this.peca = []
             this.peca = new Array(8).fill(null).map(()=> new Array(8).fill(null));
+            this.vuneravelEnPassant = null;
         }
 
         Mostrapeca(posicao?:Posicao) : Peca|null{

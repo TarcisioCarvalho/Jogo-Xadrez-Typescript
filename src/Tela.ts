@@ -103,6 +103,29 @@ export class Tela{
             Tela.JogadaEspecialRoqueGrande(Tela.pecaAMovimentar,partidaXadrez);
         
             Tela.pecaAMovimentar.incrementaQtdMovimentos();
+
+            tabuleiro.vuneravelEnPassant = null;
+            if(Tela.pecaAMovimentar.toString() === "Peao" && (destino.linha === origem?.linha + 2 || destino.linha === origem?.linha - 2)) 
+            tabuleiro.vuneravelEnPassant = Tela.pecaAMovimentar;
+
+            // Remove Peca Variavel En passant
+            if(Tela.pecaAMovimentar.toString() === "Peao" &&
+                origem?.coluna !== destino.coluna &&
+                pecaRetirada === null
+            ){
+                let posicaoPeao : Posicao | null = null;
+                if(Tela.pecaAMovimentar.Cor === Cor.Branca)
+                 posicaoPeao = new Posicao(Tela.pecaAMovimentar.posicao?.linha! + 1, Tela.pecaAMovimentar.posicao?.coluna!);
+
+                if(Tela.pecaAMovimentar.Cor === Cor.Preta)
+                posicaoPeao = new Posicao(Tela.pecaAMovimentar.posicao?.linha! - 1, Tela.pecaAMovimentar.posicao?.coluna!);
+
+                pecaRetirada =  Tela.retiraPecaTabuleiroJogo(posicaoPeao, partidaXadrez, tabuleiro);
+
+                Tela.RemoveImagemTabuleiro(posicaoPeao);
+                Tela.ColocaPecaCapturada(pecaRetirada);
+            }
+
             if(partidaXadrez.xequeMate()) alert("Xeque Mate");
             partidaXadrez.mudaJogador();
 
@@ -183,6 +206,15 @@ export class Tela{
         imgPecaCapturada.src = pecaRetirada?.imagem;
         imgPecaCapturada.addEventListener('click',()=> '');
         divPecasCapturadas?.appendChild(imgPecaCapturada);
+    }
+
+    static retiraPecaTabuleiroJogo(posicaoPeao:Posicao, partidaXadrez:PartidaXadrez, tabuleiro:Tabuleiro):Peca | null{
+          const pecaRetirada = tabuleiro.retiraPeca(posicaoPeao);
+                partidaXadrez.pecasCapturadas.push(pecaRetirada!);
+                partidaXadrez.pecasEmJogo = partidaXadrez.pecasEmJogo
+                .filter(pecaEmJogo => pecaEmJogo !== pecaRetirada);
+
+                return pecaRetirada;
     }
 }
 

@@ -5,6 +5,7 @@ export class Tabuleiro {
         this.colunas = colunas;
         this.peca = [];
         this.peca = new Array(8).fill(null).map(() => new Array(8).fill(null));
+        this.vuneravelEnPassant = null;
     }
     Mostrapeca(posicao) {
         if (posicao)

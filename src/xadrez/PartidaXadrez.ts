@@ -13,7 +13,7 @@ export class PartidaXadrez{
     
     private _turno : number;
     private _jogadorAtual : Cor;
-
+    
 
 
     public get jogadorAtual() : Cor {
