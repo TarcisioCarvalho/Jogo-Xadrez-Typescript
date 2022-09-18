@@ -96,6 +96,12 @@ export class Tela{
             if(element?.firstChild) element?.removeChild(element.firstChild!);
             element?.appendChild(img); */
 
+            if(Tela.pecaAMovimentar.toString()==="Rei" && destino.coluna === origem?.coluna + 2 ) 
+            Tela.JogadaEspecialRoquePequeno(Tela.pecaAMovimentar,partidaXadrez);
+
+            if(Tela.pecaAMovimentar.toString()==="Rei" && destino.coluna === origem?.coluna - 2 )
+            Tela.JogadaEspecialRoqueGrande(Tela.pecaAMovimentar,partidaXadrez);
+        
             Tela.pecaAMovimentar.incrementaQtdMovimentos();
             if(partidaXadrez.xequeMate()) alert("Xeque Mate");
             partidaXadrez.mudaJogador();
@@ -138,6 +144,24 @@ export class Tela{
             
         }
        
+    }
+
+    static JogadaEspecialRoqueGrande(rei:Peca,partida:PartidaXadrez){
+        const posicaoOrigemTorre = new Posicao(rei.posicao?.linha,rei.posicao?.coluna - 2);
+        const torre = partida.tabuleiro.retiraPeca(posicaoOrigemTorre);
+        Tela.RemoveImagemTabuleiro(posicaoOrigemTorre);
+        const posicaoDestinoTorre = new Posicao(rei.posicao?.linha,rei.posicao?.coluna + 1);
+        partida.tabuleiro.colocaPeca(torre,posicaoDestinoTorre);
+        Tela.ColocaImagemPecaMovimentadaTabuleiro(torre);
+    }
+
+    static JogadaEspecialRoquePequeno(rei:Peca,partida:PartidaXadrez){
+        const posicaoOrigemTorre = new Posicao(rei.posicao?.linha,rei.posicao?.coluna + 1);
+        const torre = partida.tabuleiro.retiraPeca(posicaoOrigemTorre);
+        Tela.RemoveImagemTabuleiro(posicaoOrigemTorre);
+        const posicaoDestinoTorre = new Posicao(rei.posicao?.linha,rei.posicao?.coluna - 1);
+        partida.tabuleiro.colocaPeca(torre,posicaoDestinoTorre);
+        Tela.ColocaImagemPecaMovimentadaTabuleiro(torre);
     }
 
     static RemoveImagemTabuleiro(posicao:Posicao):void{

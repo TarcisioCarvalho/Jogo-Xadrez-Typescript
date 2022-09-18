@@ -7,9 +7,19 @@ import { Tabuleiro } from "./Tabuleiro.js";
         
         public posicao:Posicao|null = null;
         public imagem:string|null|undefined;
-        protected qtdMovimentos:number = 0;
         
-        constructor(public Cor:Cor,public tabuleiro:Tabuleiro){}
+        private _qtdMovimentos : number;
+        public get qtdMovimentos() : number {
+            return this._qtdMovimentos;
+        }
+        private set qtdMovimentos(v : number) {
+            this._qtdMovimentos = v;
+        }
+        
+        
+        constructor(public Cor:Cor,public tabuleiro:Tabuleiro){
+            this._qtdMovimentos = 0;
+        }
 
         public incrementaQtdMovimentos():void{
             this.qtdMovimentos++;

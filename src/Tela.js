@@ -66,6 +66,10 @@ export class Tela {
                   element = document.querySelector(`#i${linha}${coluna}`);
                   if(element?.firstChild) element?.removeChild(element.firstChild!);
                   element?.appendChild(img); */
+                if (Tela.pecaAMovimentar.toString() === "Rei" && destino.coluna === origem?.coluna + 2)
+                    Tela.JogadaEspecialRoquePequeno(Tela.pecaAMovimentar, partidaXadrez);
+                if (Tela.pecaAMovimentar.toString() === "Rei" && destino.coluna === origem?.coluna - 2)
+                    Tela.JogadaEspecialRoqueGrande(Tela.pecaAMovimentar, partidaXadrez);
                 Tela.pecaAMovimentar.incrementaQtdMovimentos();
                 if (partidaXadrez.xequeMate())
                     alert("Xeque Mate");
@@ -98,6 +102,22 @@ export class Tela {
                 quadrado.style.border = '1px solid yellow';
             }
         }
+    }
+    static JogadaEspecialRoqueGrande(rei, partida) {
+        const posicaoOrigemTorre = new Posicao(rei.posicao?.linha, rei.posicao?.coluna - 2);
+        const torre = partida.tabuleiro.retiraPeca(posicaoOrigemTorre);
+        Tela.RemoveImagemTabuleiro(posicaoOrigemTorre);
+        const posicaoDestinoTorre = new Posicao(rei.posicao?.linha, rei.posicao?.coluna + 1);
+        partida.tabuleiro.colocaPeca(torre, posicaoDestinoTorre);
+        Tela.ColocaImagemPecaMovimentadaTabuleiro(torre);
+    }
+    static JogadaEspecialRoquePequeno(rei, partida) {
+        const posicaoOrigemTorre = new Posicao(rei.posicao?.linha, rei.posicao?.coluna + 1);
+        const torre = partida.tabuleiro.retiraPeca(posicaoOrigemTorre);
+        Tela.RemoveImagemTabuleiro(posicaoOrigemTorre);
+        const posicaoDestinoTorre = new Posicao(rei.posicao?.linha, rei.posicao?.coluna - 1);
+        partida.tabuleiro.colocaPeca(torre, posicaoDestinoTorre);
+        Tela.ColocaImagemPecaMovimentadaTabuleiro(torre);
     }
     static RemoveImagemTabuleiro(posicao) {
         const element = document.querySelector(`#i${posicao.linha}${posicao.coluna}`);

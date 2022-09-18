@@ -58,6 +58,6 @@ export class Torre extends Peca {
         return false;
     }
     toString() {
-        return "T";
+        return "Torre";
     }
 }

@@ -51,7 +51,7 @@ export class PartidaXadrez{
 
         public  colocaPecas(tabuleiro:Tabuleiro= this.tabuleiro):void{
             
-            this.colocaNovaPeca(new Rei(Cor.Branca,this.tabuleiro),new Posicao(7,4),tabuleiro);
+            this.colocaNovaPeca(new Rei(Cor.Branca,this.tabuleiro,this),new Posicao(7,4),tabuleiro);
             this.colocaNovaPeca(new Rainha(Cor.Branca,this.tabuleiro),new Posicao(7,3),tabuleiro);
 
             this.colocaNovaPeca(new Torre(Cor.Branca,this.tabuleiro),new Posicao(7,0),tabuleiro);
@@ -73,7 +73,7 @@ export class PartidaXadrez{
             this.colocaNovaPeca(new Peao(Cor.Branca,this.tabuleiro),new Posicao(6,0),tabuleiro);
             
 
-            this.colocaNovaPeca(new Rei(Cor.Preta,this.tabuleiro),new Posicao(0,4),tabuleiro);
+            this.colocaNovaPeca(new Rei(Cor.Preta,this.tabuleiro,this),new Posicao(0,4),tabuleiro);
             this.colocaNovaPeca(new Rainha(Cor.Preta,this.tabuleiro),new Posicao(0,3),tabuleiro);
 
             this.colocaNovaPeca(new Torre(Cor.Preta,this.tabuleiro),new Posicao(0,0),tabuleiro);

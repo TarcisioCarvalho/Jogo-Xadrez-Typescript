@@ -3,7 +3,13 @@ export class Peca {
         this.Cor = Cor;
         this.tabuleiro = tabuleiro;
         this.posicao = null;
-        this.qtdMovimentos = 0;
+        this._qtdMovimentos = 0;
+    }
+    get qtdMovimentos() {
+        return this._qtdMovimentos;
+    }
+    set qtdMovimentos(v) {
+        this._qtdMovimentos = v;
     }
     incrementaQtdMovimentos() {
         this.qtdMovimentos++;

@@ -70,7 +70,7 @@ export class Torre extends Peca{
     }
 
 toString():string {
-    return "T";
+    return "Torre";
 }
 
 
