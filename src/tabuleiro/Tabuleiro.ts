@@ -24,7 +24,6 @@ import { Posicao } from "./Posicao.js";
         }
 
         existePecaCorAdversaria(posicao:Posicao,cor:Cor):boolean{
-            console.log(this.Mostrapeca(posicao) !== null && this.Mostrapeca(posicao)?.Cor !== cor)
             return this.Mostrapeca(posicao) !== null && this.Mostrapeca(posicao)?.Cor !== cor;
         }
 
@@ -59,13 +58,12 @@ import { Posicao } from "./Posicao.js";
            return pecaAux;
         }
 
-        colocaPeca(peca:Peca,posicao:Posicao,flag?:boolean){
+        colocaPeca(peca:Peca,posicao:Posicao){
            if (this.existePeca(posicao)) throw new TabuleiroError("Já existe Peça nessa posição"); 
             
            
             this.peca[posicao.linha][posicao.coluna] = peca;
             peca.posicao=posicao;
-            //if(flag)console.log(this.peca);
         }
       
     }

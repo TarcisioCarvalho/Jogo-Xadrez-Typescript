@@ -12,7 +12,6 @@ export class Tabuleiro {
         return null;
     }
     existePecaCorAdversaria(posicao, cor) {
-        console.log(this.Mostrapeca(posicao) !== null && this.Mostrapeca(posicao)?.Cor !== cor);
         return this.Mostrapeca(posicao) !== null && this.Mostrapeca(posicao)?.Cor !== cor;
     }
     existePeca(posicao) {
@@ -38,11 +37,10 @@ export class Tabuleiro {
         this.peca[posicao.linha][posicao.coluna] = null;
         return pecaAux;
     }
-    colocaPeca(peca, posicao, flag) {
+    colocaPeca(peca, posicao) {
         if (this.existePeca(posicao))
             throw new TabuleiroError("Já existe Peça nessa posição");
         this.peca[posicao.linha][posicao.coluna] = peca;
         peca.posicao = posicao;
-        //if(flag)console.log(this.peca);
     }
 }

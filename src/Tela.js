@@ -6,7 +6,7 @@ export class Tela {
         const tabuleiro = partidaXadrez.tabuleiro;
         let tabuleiroElement = document.querySelector('#tabuleiro');
         let pecaRetirada;
-        function teste(e) {
+        function executaJogada(e) {
             const linha = e.target.id[1] === undefined ? undefined : Number(e.target.id[1]);
             const coluna = e.target.id[2] === undefined ? undefined : Number(e.target.id[2]);
             if (tabuleiro.Mostrapeca(new Posicao(linha, coluna)) !== null &&
@@ -27,7 +27,6 @@ export class Tela {
                 Tela.pecaAMovimentar.Cor === partidaXadrez.jogadorAtual &&
                 Tela.pecaAMovimentar.podeMover(new Posicao(linha, coluna)) &&
                 Tela.pecaAMovimentar.movimentosPossiveis(new Posicao(linha, coluna))) {
-                console.log(Tela.pecaAMovimentar);
                 const origem = Tela.pecaAMovimentar.posicao;
                 const destino = new Posicao(linha, coluna);
                 pecaRetirada = tabuleiro.retiraPeca(destino);
@@ -40,38 +39,33 @@ export class Tela {
                 if (partidaXadrez.meColoqueiEmXeque()) {
                     alert("Jogada inválida você não pode se Colocar em Xeque!");
                     partidaXadrez.desfazJogada(origem, destino, pecaRetirada);
-                    /*  tabuleiro.retiraPeca(destino);
-                     if(pecaRetirada!==null)tabuleiro.colocaPeca(pecaRetirada,destino);
-                     tabuleiro.colocaPeca(Tela.pecaAMovimentar,origem);
-                     if(pecaRetirada!==null) partidaXadrez.pecasEmJogo.push(pecaRetirada);
-                     console.log("mostrando pecas em jogo",partidaXadrez.pecasEmJogo); */
                     Tela.pecaAMovimentar = null;
                     return;
                 }
                 if (partidaXadrez.coloqueiEmXeque())
                     alert("Cheque!");
-                let element = document.querySelector(`#i${origem.linha}${origem.coluna}`);
-                element?.removeChild(element.firstChild);
+                Tela.RemoveImagemTabuleiro(origem);
+                /* let element = document.querySelector(`#i${origem!.linha}${origem!.coluna}`);
+                element?.removeChild(element.firstChild!); */
                 if (pecaRetirada !== null)
                     partidaXadrez.pecasCapturadas.push(pecaRetirada);
                 // Remove Peça da lista de peças em jogo.
                 partidaXadrez.pecasEmJogo = partidaXadrez.pecasEmJogo
                     .filter(pecaEmjogo => pecaEmjogo !== pecaRetirada);
                 if (pecaRetirada !== null) {
-                    const divPecasCapturadas = pecaRetirada?.Cor === Cor.Branca ? document.querySelector("#pecasCapturadasBrancas") : document.querySelector("#pecasCapturadasPretas");
+                    Tela.ColocaPecaCapturada(pecaRetirada);
+                    /* const divPecasCapturadas = pecaRetirada?.Cor===Cor.Branca?document.querySelector("#pecasCapturadasBrancas"):document.querySelector("#pecasCapturadasPretas");
                     const imgPecaCapturada = document.createElement('img');
                     imgPecaCapturada.src = pecaRetirada?.imagem;
-                    imgPecaCapturada.addEventListener('click', () => '');
-                    divPecasCapturadas?.appendChild(imgPecaCapturada);
+                    imgPecaCapturada.addEventListener('click',()=> '');
+                    divPecasCapturadas?.appendChild(imgPecaCapturada); */
                 }
-                //tabuleiro.colocaPeca(Tela.pecaAMovimentar,new Posicao(linha,coluna));
-                const img = document.createElement('img');
-                img.src = Tela.pecaAMovimentar.imagem;
-                //img.addEventListener('click',()=> Tela.removePeca(tabuleiro,linha,coluna));
-                element = document.querySelector(`#i${linha}${coluna}`);
-                if (element?.firstChild)
-                    element?.removeChild(element.firstChild);
-                element?.appendChild(img);
+                Tela.ColocaImagemPecaMovimentadaTabuleiro(Tela.pecaAMovimentar);
+                /*   const img = document.createElement('img');
+                  img.src = Tela.pecaAMovimentar.imagem;
+                  element = document.querySelector(`#i${linha}${coluna}`);
+                  if(element?.firstChild) element?.removeChild(element.firstChild!);
+                  element?.appendChild(img); */
                 Tela.pecaAMovimentar.incrementaQtdMovimentos();
                 if (partidaXadrez.xequeMate())
                     alert("Xeque Mate");
@@ -84,12 +78,12 @@ export class Tela {
                 const quadrado = document.createElement('div');
                 quadrado.setAttribute("id", `i${i}${j}`);
                 quadrado.setAttribute('class', "quadrado");
-                quadrado.addEventListener('click', teste);
+                quadrado.addEventListener('click', executaJogada);
                 if (tabuleiro.Mostrapeca(new Posicao(i, j)) !== null) {
                     const image = document.createElement('img');
                     image.setAttribute("id", `j${i}${j}`);
                     image.addEventListener('click', () => {
-                        teste;
+                        executaJogada;
                         //this.removePeca(tabuleiro,i,j);
                     });
                     image.src = tabuleiro.Mostrapeca(new Posicao(i, j))?.imagem;
@@ -105,13 +99,24 @@ export class Tela {
             }
         }
     }
-    static removePeca(tabuleiro, linha, coluna) {
-        Tela.pecaAMovimentar = tabuleiro.retiraPeca(new Posicao(linha, coluna));
-        /*   console.log(tabuleiro);
-          console.log(this.pecaAMovimentar);
-          quadrado.removeChild(image);
-          this.divAMovimentar = quadrado;
-          this.imageAMovimentar = image; */
+    static RemoveImagemTabuleiro(posicao) {
+        const element = document.querySelector(`#i${posicao.linha}${posicao.coluna}`);
+        element?.removeChild(element.firstChild);
+    }
+    static ColocaImagemPecaMovimentadaTabuleiro(pecaMovimentada) {
+        const img = document.createElement('img');
+        img.src = pecaMovimentada.imagem;
+        const element = document.querySelector(`#i${pecaMovimentada.posicao.linha}${pecaMovimentada.posicao.coluna}`);
+        if (element?.firstChild)
+            element?.removeChild(element.firstChild);
+        element?.appendChild(img);
+    }
+    static ColocaPecaCapturada(pecaRetirada) {
+        const divPecasCapturadas = pecaRetirada?.Cor === Cor.Branca ? document.querySelector("#pecasCapturadasBrancas") : document.querySelector("#pecasCapturadasPretas");
+        const imgPecaCapturada = document.createElement('img');
+        imgPecaCapturada.src = pecaRetirada?.imagem;
+        imgPecaCapturada.addEventListener('click', () => '');
+        divPecasCapturadas?.appendChild(imgPecaCapturada);
     }
 }
 Tela.pecaAMovimentar = null;

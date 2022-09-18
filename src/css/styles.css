@@ -1,5 +1,11 @@
 body{
     height: 100vh;
+    background-color: gray;
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    align-items: center;
+    background-image: url('https://i.pinimg.com/originals/75/9b/d1/759bd1ea0b3a8c9f7b529e7dc85da53d.jpg');
 }
 
 .tabuleiro{
@@ -7,7 +13,9 @@ body{
     grid-template-columns: repeat(8, 1fr);
     grid-template-rows: repeat(8,1fr);
     border: 1px solid black;
-  
+    width: 50rem;
+    height: 30rem;
+    background-color: white;
 }
 
 .quadrado{
@@ -26,7 +34,12 @@ img{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 1rem;
+   
+    width: 50rem;
+    height: 10rem;
+    border-radius: 6px;
+    background-image: url('https://thumbs.dreamstime.com/b/homem-no-p%C3%A2ntano-assombrado-com-uma-tocha-m%C3%A1gica-que-anda-estilo-digital-da-arte-pintura-ilustra%C3%A7%C3%A3o-141583703.jpg');
+    background-position: cover;
 }
 
 #pecasCapturadasPretas img{
@@ -40,7 +53,14 @@ img{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 1rem;
+    
+    width: 50rem;
+    height: 10rem;
+    border-radius: 6px;
+    background-image: url('https://static8.depositphotos.com/1378260/850/v/600/depositphotos_8509572-stock-illustration-savannah-sunset.jpg');
+    background-position: cover;
+    background-size: 100%;
+    background-repeat: no-repeat;
 }
 
 #pecasCapturadasBrancas img{
