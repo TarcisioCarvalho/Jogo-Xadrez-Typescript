@@ -32,10 +32,10 @@ Jogo de Xadrez Desenvolvido com Typescript e Orientação a Objetos.
 
 ## Layout do Jogo
 
-<img  src = 'https://github.com/TarcisioCarvalho/coffe-delivery/blob/main/src/assets/img/HomeCoffeDelivery.jpg'>
+<img  src = 'https://github.com/TarcisioCarvalho/Jogo-Xadrez-Typescript/blob/main/src/assets/Imgs_Projeto/Jogo-Xadrez.jpg?raw=true'>
 
 ## Funcionalidades do jogo
-<img  src = 'https://github.com/TarcisioCarvalho/coffe-delivery/blob/main/src/assets/img/HomeCoffeDelivery.jpg'>
+<img  src = 'https://github.com/TarcisioCarvalho/Jogo-Xadrez-Typescript/blob/main/src/assets/Imgs_Projeto/CapturaPecas.gif?raw=true'>
 
 # Tecnologias utilizadas
 
