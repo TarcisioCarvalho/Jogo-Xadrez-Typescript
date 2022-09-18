@@ -29,12 +29,20 @@ Jogo de Xadrez Desenvolvido com Typescript e Orientação a Objetos.
 - Promoção do peão para rainha
 - Pecas capturadas mostradas visualmente
 
+## Diagrama de classes que o projeto foi baseado
+
+
+<img  src = 'https://github.com/TarcisioCarvalho/Jogo-Xadrez-Typescript/blob/main/src/assets/Imgs_Projeto/chess-system-design.png?raw=true'>
 
 ## Layout do Jogo
 
 <img  src = 'https://github.com/TarcisioCarvalho/Jogo-Xadrez-Typescript/blob/main/src/assets/Imgs_Projeto/Jogo-Xadrez.jpg?raw=true'>
 
 ## Funcionalidades do jogo
+### Captura de Peças
+<img  src = 'https://github.com/TarcisioCarvalho/Jogo-Xadrez-Typescript/blob/main/src/assets/Imgs_Projeto/CapturaPecas.gif?raw=true'>
+
+###
 <img  src = 'https://github.com/TarcisioCarvalho/Jogo-Xadrez-Typescript/blob/main/src/assets/Imgs_Projeto/CapturaPecas.gif?raw=true'>
 
 # Tecnologias utilizadas
