@@ -3,6 +3,7 @@ import { Peca } from "./tabuleiro/Peca.js";
 import { Posicao } from "./tabuleiro/Posicao.js";
 import { PartidaXadrez } from "./xadrez/PartidaXadrez.js";
 import { Cor } from "./tabuleiro/Enums/Cor.js";
+import { Rainha } from "./xadrez/Rainha.js";
 
 export class Tela{
 
@@ -61,7 +62,22 @@ export class Tela{
             .filter(pecaEmjogo => pecaEmjogo!==pecaRetirada);
 
             tabuleiro.colocaPeca(Tela.pecaAMovimentar,new Posicao(linha,coluna));
-            //tabuleiro.colocaPeca(Tela.pecaAMovimentar,new Posicao(linha,coluna));
+           //Jogada Especial Promocao
+           if(Tela.pecaAMovimentar.toString() === "Peao" &&
+                destino.linha === 7 || destino.linha === 0
+           ){
+                const peao = tabuleiro.retiraPeca(destino);
+                const novaRainha = new Rainha(peao?.Cor, tabuleiro);
+                tabuleiro.colocaPeca(novaRainha,peao?.posicao);
+
+                partidaXadrez.pecasEmJogo = partidaXadrez.pecasEmJogo
+                .filter(pecaEmJogo => pecaEmJogo !== peao);
+
+                partidaXadrez.pecasEmJogo.push(novaRainha);
+
+                Tela.pecaAMovimentar = novaRainha;
+           }
+
             if(partidaXadrez.meColoqueiEmXeque()) {
                 alert("Jogada inválida você não pode se Colocar em Xeque!");
                 partidaXadrez.desfazJogada(origem!,destino,pecaRetirada);
