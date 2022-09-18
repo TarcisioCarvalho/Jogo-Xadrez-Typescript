@@ -1,4 +1,4 @@
-# Jogo-Xadrez---react
+# Jogo-Xadrez---Typescript
 [![NPM](https://img.shields.io/npm/l/react)](https://github.com/TarcisioCarvalho/Jogo-Xadrez-Typescript/blob/main/LICENSE)
 
 # Sobre o projeto
