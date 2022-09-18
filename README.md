@@ -39,11 +39,25 @@ Jogo de Xadrez Desenvolvido com Typescript e Orientação a Objetos.
 <img  src = 'https://github.com/TarcisioCarvalho/Jogo-Xadrez-Typescript/blob/main/src/assets/Imgs_Projeto/Jogo-Xadrez.jpg?raw=true'>
 
 ## Funcionalidades do jogo
+
 ### Captura de Peças
 <img  src = 'https://github.com/TarcisioCarvalho/Jogo-Xadrez-Typescript/blob/main/src/assets/Imgs_Projeto/CapturaPecas.gif?raw=true'>
 
-###
-<img  src = 'https://github.com/TarcisioCarvalho/Jogo-Xadrez-Typescript/blob/main/src/assets/Imgs_Projeto/CapturaPecas.gif?raw=true'>
+### Promoção
+<img  src = 'https://github.com/TarcisioCarvalho/Jogo-Xadrez-Typescript/blob/main/src/assets/Imgs_Projeto/Promocao.gif?raw=true'>
+
+### Xeque-Mate
+<img  src = 'https://github.com/TarcisioCarvalho/Jogo-Xadrez-Typescript/blob/main/src/assets/Imgs_Projeto/Xeque-Mate.gif?raw=true'>
+
+### Roque-Pequeno
+<img  src = 'https://github.com/TarcisioCarvalho/Jogo-Xadrez-Typescript/blob/main/src/assets/Imgs_Projeto/JogadaEspecialRoquePequeno.gif?raw=true'>
+
+### Roque-Grande
+<img  src = 'https://github.com/TarcisioCarvalho/Jogo-Xadrez-Typescript/blob/main/src/assets/Imgs_Projeto/JogadaEspecialRoqueGrande.gif?raw=true'>
+
+### En-Passant
+<img  src = 'https://github.com/TarcisioCarvalho/Jogo-Xadrez-Typescript/blob/main/src/assets/Imgs_Projeto/JogadaEspecialEnPassant.gif?raw=true'>
+
 
 # Tecnologias utilizadas
 
@@ -63,10 +77,10 @@ Pré-requisitos: npm / yarn
 
 ```bash
 # clonar repositório
-git clone https://github.com/TarcisioCarvalho/coffe-delivery
+git clone https://github.com/TarcisioCarvalho/Jogo-Xadrex-Typescript
 
 # entrar na pasta do projeto front end web
-cd coffe-delivery
+cd Jogo-Xadrex-Typescript
 
 # instalar dependências
 npm install
